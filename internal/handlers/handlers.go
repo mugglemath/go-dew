@@ -46,13 +46,13 @@ func HandleSensorData(c *gin.Context) {
 	isoTimestamp := time.Now().Format(time.RFC3339)
 
 	message := fmt.Sprintf("%s\n"+
-		"Indoor Temperature = %.2f C\n"+
-		"Indoor Humidity = %.2f %%\n"+
-		"Indoor Dewpoint = %.2f C\n"+
-		"Outdoor Dewpoint = %.2f C\n"+
-		"Dewpoint Delta = %.2f C\n"+
-		"Windows Should Be = %s\n"+
-		"Humidity Alert = %t",
+		"Indoor Temperature: %.2f C\n"+
+		"Indoor Humidity: %.2f %%\n"+
+		"Indoor Dewpoint: %.2f C\n"+
+		"Outdoor Dewpoint: %.2f C\n"+
+		"Dewpoint Delta: %.2f C\n"+
+		"Windows Should Be: %s\n"+
+		"Humidity Alert: %t",
 		isoTimestamp, indoorTemperature, indoorHumidity, indoorDewpoint,
 		outdoorDewpoint, dewpointDelta, windowsShouldBe, humidityAlert)
 
@@ -76,10 +76,10 @@ func HandleWindowAlert(c *gin.Context) {
 	isoTimestamp := time.Now().Format(time.RFC3339)
 
 	message := fmt.Sprintf("%s\n@everyone\n"+
-		"Indoor Dewpoint = %.2f C\n"+
-		"Outdoor Dewpoint = %.2f C\n"+
-		"Dewpoint Delta = %.2f C\n"+
-		"Windows Should Be = %s\n",
+		"Indoor Dewpoint: %.2f C\n"+
+		"Outdoor Dewpoint: %.2f C\n"+
+		"Dewpoint Delta: %.2f C\n"+
+		"Windows Should Be: %s\n",
 		isoTimestamp, indoorDewpoint, outdoorDewpoint, dewpointDelta, windowsShouldBe)
 
 	discord.SendDiscordMessage(message, os.Getenv("DISCORD_WINDOW_ALERT_WEBHOOK_URL"))
@@ -99,7 +99,7 @@ func HandleHumidityAlert(c *gin.Context) {
 	humidityAlert := data["humidityAlert"].(bool)
 	isoTimestamp := time.Now().Format(time.RFC3339)
 
-	message := fmt.Sprintf("%s\n@everyone\nIndoor Humidity = %.2f %%\nHumidity Alert = %t",
+	message := fmt.Sprintf("%s\n@everyone\nIndoor Humidity: %.2f %%\nHumidity Alert: %t",
 		isoTimestamp, indoorHumidity, humidityAlert)
 
 	discord.SendDiscordMessage(message, os.Getenv("DISCORD_HUMIDITY_ALERT_WEBHOOK_URL"))
